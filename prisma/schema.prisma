@@ -1,0 +1,101 @@
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+enum Type {
+  daily
+  weekly
+  monthly
+  yearly
+}
+
+model Progress {
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  workDone   String
+  percentage Float
+  goalId     String   @db.ObjectId
+  goal       Goal     @relation("goalToProgress", fields: [goalId], references: [id], onDelete: Cascade)
+  day        DateTime @default(now())
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Goal {
+  id          String     @id @default(auto()) @map("_id") @db.ObjectId
+  goal        String
+  description String
+  start       DateTime
+  deadline    DateTime
+  type        Type
+  purpose     String
+  impact      String
+  unitTask    String
+  userId      String
+  progress    Progress[] @relation("goalToProgress")
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+}
+
+model Tag {
+  id        String    @id @default(auto()) @map("_id") @db.ObjectId
+  text      String    @unique
+  tagItems  TagItem[]
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+}
+
+model TagItem {
+  // for many to many relation between tag and diary - a tag can be associated with multiple diaries and similarly multiple diaries can be associated to multiple tags
+  id      String @id @default(auto()) @map("_id") @db.ObjectId
+  tagId   String @db.ObjectId
+  tag     Tag    @relation(fields: [tagId], references: [id], onDelete: Cascade)
+  diaryId String @db.ObjectId
+  diary   Diary  @relation(fields: [diaryId], references: [id], onDelete: Cascade)
+}
+
+model Diary {
+  id           String    @id @default(auto()) @map("_id") @db.ObjectId
+  userId       String
+  productivity Float
+  description  String?
+  main         String[] // main events
+  day          DateTime  @default(now())
+  tagItems     TagItem[]
+  type         String    @default("normal") // happy, good, etc
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+}
+
+model Idea {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  userId      String
+  title       String
+  description String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Note {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  title       String
+  description String
+  userId      String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Quote {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  quote     String
+  userId    String
+  author    String
+  book      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
