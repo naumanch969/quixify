@@ -6,6 +6,7 @@ import Graphs from './components/graphs'
 import RelatedDiaries from './components/related-diaries'
 import DiaryDetail from './components/diary-detail'
 import { Diary, Progress } from '@prisma/client'
+import { PopulatedDiary } from '@/interfaces'
 
 const DiaryPage = async ({ params: { diaryId } }: { params: { diaryId: string } }) => {
 
@@ -29,6 +30,7 @@ const DiaryPage = async ({ params: { diaryId } }: { params: { diaryId: string } 
 
       <div className="space-y-4 ">
         <DiaryDetail diary={diary as Diary} />
+        <Graphs diary={diary as PopulatedDiary} />
       </div>
 
       <RelatedDiaries />

@@ -21,7 +21,7 @@ const GoalCard = ({ goal }: { goal: PopulatedGoal }) => {
     const monthsLeft = differenceInCalendarMonths(goal.deadline, new Date())
 
     return (
-        <Card className="bg-primary/10 rounded-xl border-0 transition flex flex-col justify-between "            >
+        <Card className="min-h-[18rem] bg-primary/10 rounded-xl border-0 transition flex flex-col justify-between "            >
 
             <div className="flex flex-col">
                 <CardHeader className="flex flex-col gap-4 justify-start items-center text-muted-foreground  ">

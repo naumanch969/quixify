@@ -1,24 +1,24 @@
-import { Diary } from "@prisma/client";
+import { Quote } from "@prisma/client";
 import { create } from "zustand";
 
 interface Props {
   formOpen: boolean;
   viewOpen: boolean;
-  diary: Diary | null;
+  quote: Quote | null;
   onFormOpen: () => void;
   onFormClose: () => void;
   onViewOpen: () => void;
   onViewClose: () => void;
-  setDiary: (diary: Diary | null) => void;
+  setQuote: (quote: Quote | null) => void;
 }
 
-export const useDiaryModal = create<Props>((set) => ({
+export const useQuoteModal = create<Props>((set) => ({
   formOpen: false,
   viewOpen: false,
-  diary: null,
+  quote: null,
   onFormOpen: () => set({ formOpen: true, viewOpen: false }),
   onFormClose: () => set({ formOpen: false }),
   onViewOpen: () => set({ viewOpen: true, formOpen: false }),
   onViewClose: () => set({ viewOpen: false }),
-  setDiary: (diary) => set({ diary }),
+  setQuote: (quote) => set({ quote }),
 }));

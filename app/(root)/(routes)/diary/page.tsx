@@ -29,6 +29,7 @@ const DiaryPage = async ({ searchParams }: Props) => {
     orderBy: { createdAt: "desc" },
   });
 
+  
 
   return (
     <DiaryClient diaries={diaries} />

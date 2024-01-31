@@ -91,11 +91,12 @@ model Note {
 }
 
 model Quote {
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
-  quote     String
-  userId    String
-  author    String
-  book      String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  quote      String
+  userId     String
+  author     String
+  book       String
+  isFeatured Boolean @default(false)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
 }

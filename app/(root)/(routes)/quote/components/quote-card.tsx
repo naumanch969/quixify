@@ -1,11 +1,11 @@
 "use client"
 
 import React, { useState } from 'react'
-import { Idea } from '@prisma/client'
+import { Quote } from '@prisma/client'
 
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import Link from 'next/link';
-import { useIdeaModal } from '@/hooks/use-idea';
+import { useQuoteModal } from '@/hooks/use-quote';
 import { Button } from '@/components/ui/button';
 import { Edit, Trash } from 'lucide-react';
 import AlertModal from '@/components/modals/alert-modal';
@@ -14,9 +14,9 @@ import toast from 'react-hot-toast';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
 
-const IdeaCard = ({ idea }: { idea: Idea }) => {
+const QuoteCard = ({ quote }: { quote: Quote }) => {
 
-  const ideaModal = useIdeaModal()
+  const quoteModal = useQuoteModal()
   const router = useRouter()
   const [open, setOpen] = useState(false)
   const [loading, setLoading] = useState(false)
@@ -24,7 +24,7 @@ const IdeaCard = ({ idea }: { idea: Idea }) => {
   const onDelete = async () => {
     try {
       setLoading(true)
-      await axios.delete(`/api/idea/${idea.id}`)
+      await axios.delete(`/api/quote/${quote.id}`)
       router.refresh()
       setOpen(false)
       toast.success('Success!')
@@ -36,8 +36,8 @@ const IdeaCard = ({ idea }: { idea: Idea }) => {
   }
 
   const onUpdateClick = () => {
-    ideaModal.onFormOpen()
-    ideaModal.setIdea(idea)
+    quoteModal.onFormOpen()
+    quoteModal.setQuote(quote)
   }
 
   return (
@@ -48,32 +48,29 @@ const IdeaCard = ({ idea }: { idea: Idea }) => {
         onConfirm={onDelete}
         loading={loading}
       />
-      <Card className="min-h-[18rem] bg-primary/10 rounded-xl border-0 transition flex flex-col justify-between "            >
+      <Card className="min-h-[18rem] bg-primary/10 rounded-xl border-0 transition flex flex-col justify-between " >
 
         <div className="flex flex-col">
-          <CardHeader className="flex flex-col gap-4 justify-start items-center text-muted-foreground  ">
-            <CardTitle className="text-white w-full text-start capitalize hover:opacity-80 " >
-              <Link href={`/idea/view/${idea.id}`} className='flex items-center gap-x-2' >{idea.title}</Link>
+          <CardHeader className="flex flex-col gap-4 justify-center items-center text-muted-foreground  ">
+            <CardTitle className="text-white w-full capitalize hover:opacity-80 text-center "  >
+              <Link href={`/quote/view/${quote.id}`} className='flex items-center gap-x-2' >{quote.quote}</Link>
             </CardTitle>
           </CardHeader>
 
           <CardContent>
-            <CardDescription className="text-xs text-start">
-              {idea.description.length > 450
-                ? `${idea.description.substring(0, 450)}...`
-                : idea.description
-              }
+            <CardDescription className="text-xs text-center">
+              {quote.author} {quote.book ? ` - ${quote.book}` : ''}
             </CardDescription>
           </CardContent>
-        </div>
 
-        <CardFooter className='flex justify-end items-center gap-x-2 ' >
-          <Button onClick={onUpdateClick} size='icon' variant='secondary' ><Edit /></Button>
-          <Button onClick={() => setOpen(true)} size='icon' variant='destructive' ><Trash /></Button>
-        </CardFooter>
+          <CardFooter className='flex justify-end items-center gap-x-2 ' >
+            <Button onClick={onUpdateClick} size='icon' variant='secondary' ><Edit /></Button>
+            <Button onClick={() => setOpen(true)} size='icon' variant='destructive' ><Trash /></Button>
+          </CardFooter>
+        </div>
       </Card>
     </MountedContainer>
   )
 }
 
-export default IdeaCard
+export default QuoteCard

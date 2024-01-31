@@ -22,13 +22,13 @@ export const Modal: FC<ModalProps> = ({
     }
 
     return (
-        <Dialog open={isOpen} onOpenChange={onChange} >
+        <Dialog open={isOpen} onOpenChange={onChange}  >
             <DialogContent>
                 <DialogHeader>
                     <DialogTitle>{title}</DialogTitle>
                     <DialogDescription>{description}</DialogDescription>
                 </DialogHeader>
-                <div>
+                <div className="max-h-[80vh] overflow-y-auto" >
                     {children}
                 </div>
             </DialogContent>

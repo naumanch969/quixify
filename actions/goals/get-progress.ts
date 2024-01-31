@@ -74,8 +74,7 @@ export const getProgressStat = (
         splitNumber = Math.ceil(indexOfTodaysProgress / splitLength);
         setSplitNumber(splitNumber);
       }
-      console.log(splitNumber);
-      return formattedResponse.slice(
+       return formattedResponse.slice(
         splitLength * splitNumber - splitLength,
         splitLength * splitNumber
       );

@@ -11,6 +11,7 @@ import { Button } from "./ui/button";
 import { useNoteModal } from "@/hooks/use-note";
 import { useIdeaModal } from "@/hooks/use-idea";
 import { useDiaryModal } from "@/hooks/use-diary";
+import { useQuoteModal } from "@/hooks/use-quote";
 
 export const SearchInput = () => {
   const router = useRouter();
@@ -19,6 +20,7 @@ export const SearchInput = () => {
   const noteModal = useNoteModal()
   const ideaModal = useIdeaModal()
   const diaryModal = useDiaryModal()
+  const quoteModal = useQuoteModal()
 
   const page = pathname.split('/')[1]
   const name = searchParams.get("name");
@@ -46,13 +48,16 @@ export const SearchInput = () => {
       noteModal.setNote(null) // for create, initialData should be empty
       noteModal.onFormOpen()
     } else if (page == 'idea') {
-      ideaModal.setIdea(null) 
+      ideaModal.setIdea(null)
       ideaModal.onFormOpen()
     } else if (page == 'diary') {
       diaryModal.setDiary(null)
-      diaryModal.onOpen()
+      diaryModal.onFormOpen()
     } else if (page == 'goal') {
       router.push(`/goal/form/new`)
+    } else if (page == 'quote') {
+      quoteModal.setQuote(null)
+      quoteModal.onFormOpen()
     }
   }
 

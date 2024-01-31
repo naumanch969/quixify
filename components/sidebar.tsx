@@ -1,6 +1,6 @@
 "use client";
 import { cn } from "@/lib/utils";
-import { Goal, Home, Plus, StickyNote, Indent, StickyNoteIcon } from "lucide-react";
+import { Goal, Home, Plus, StickyNote, Indent, StickyNoteIcon, Quote } from "lucide-react";
 import { usePathname, useRouter } from "next/navigation";
 import React from "react";
 import { MountedContainer } from "./ui/mounted-container";
@@ -44,14 +44,14 @@ export const Sidebar = () => {
       pro: false,
     },
     {
-      icon: Plus,
-      href: "/goal/form/new",
-      label: "Create",
-      pro: true,
+      icon: Quote,
+      href: "/quote",
+      label: "Quotes",
+      pro: false,
     },
     {
       icon: Plus,
-      href: "/diary/form/new",
+      href: "/goal/form/new",
       label: "Create",
       pro: true,
     },

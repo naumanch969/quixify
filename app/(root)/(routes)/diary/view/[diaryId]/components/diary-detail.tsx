@@ -10,7 +10,6 @@ import React, { useEffect, useState } from 'react'
 const DiaryDetail = ({ diary }: { diary: Diary }) => {
 
 
-
     return (
         <MountedContainer>
             <div className="space-y-4 ">

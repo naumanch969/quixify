@@ -17,7 +17,7 @@ import { useRouter } from 'next/navigation';
 const NoteCard = ({ note }: { note: Note }) => {
 
   const noteModal = useNoteModal()
-  const router= useRouter()
+  const router = useRouter()
   const [open, setOpen] = useState(false)
   const [loading, setLoading] = useState(false)
 
@@ -49,7 +49,7 @@ const NoteCard = ({ note }: { note: Note }) => {
         onConfirm={onDelete}
         loading={loading}
       />
-      <Card className="bg-primary/10 rounded-xl border-0 transition flex flex-col justify-between "            >
+      <Card className="min-h-[18rem] bg-primary/10 rounded-xl border-0 transition flex flex-col justify-between "            >
 
         <div className="flex flex-col">
           <CardHeader className="flex flex-col gap-4 justify-start items-center text-muted-foreground  ">
@@ -66,12 +66,12 @@ const NoteCard = ({ note }: { note: Note }) => {
               }
             </CardDescription>
           </CardContent>
-
-          <CardFooter className='flex justify-end items-center gap-x-2 ' >
-            <Button onClick={onUpdateClick} size='icon' variant='secondary' ><Edit /></Button>
-            <Button onClick={() => setOpen(true)} size='icon' variant='destructive' ><Trash /></Button>
-          </CardFooter>
         </div>
+
+        <CardFooter className='flex justify-end items-center gap-x-2 ' >
+          <Button onClick={onUpdateClick} size='icon' variant='secondary' ><Edit /></Button>
+          <Button onClick={() => setOpen(true)} size='icon' variant='destructive' ><Trash /></Button>
+        </CardFooter>
       </Card>
     </MountedContainer>
   )

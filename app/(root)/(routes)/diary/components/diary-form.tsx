@@ -42,7 +42,7 @@ import { PopulatedDiary } from "@/interfaces";
 
 const formSchema = z.object({
   productivity: z.string().min(1, { message: 'Diary is required.' }),
-  description: z.string().min(1, { message: 'Description is required.' }),
+  description: z.string(),
   main: z.array(z.string({ required_error: "Start date is required." })),
   day: z.date({ required_error: "Deadline is required." }),
   tags: z.array(z.string().min(1, { message: 'Type is required.' })),
@@ -50,10 +50,10 @@ const formSchema = z.object({
 });
 
 
-export const DiaryForm = () => {
+export const DiaryFormModal = () => {
 
   // <---------------------------------------- STATES ------------------------------------------>
-  const { diary, onClose, isOpen } = useDiaryModal()
+  const { diary, onFormClose, formOpen } = useDiaryModal()
   const [main, setMain] = useState('')
   const [tag, setTag] = useState('')
 
@@ -75,7 +75,7 @@ export const DiaryForm = () => {
 
   // <---------------------------------------- USE EFFECT ------------------------------------------>
   useEffect(() => {
-    if (isOpen) {
+    if (formOpen) {
       form.reset({
         ...(
           diary
@@ -84,7 +84,7 @@ export const DiaryForm = () => {
         )
       });
     }
-  }, [isOpen, diary, form]);
+  }, [formOpen, diary, form]);
 
   // <---------------------------------------- FUNCTIONS ------------------------------------------>
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
@@ -102,7 +102,7 @@ export const DiaryForm = () => {
         await axios.post("/api/diary", { ...values, productivity: parseFloat(values.productivity), tags: formTags, main: formMain });
       }
       toast.success("Success.")
-      onClose()
+      onFormClose()
       form.reset(initialValues);
       setMain('')
       setTag('')
@@ -146,7 +146,7 @@ export const DiaryForm = () => {
                     General information about your Day
                   </p>
                 </div>
-                <Button onClick={() => onClose()} size='icon' variant='outline' className="rounded-full hover:bg-background hover:bg-opacity-75 " ><X className="w-4 h-4 " /></Button>
+                <Button onClick={() => onFormClose()} size='icon' variant='outline' className="rounded-full hover:bg-background hover:bg-opacity-75 " ><X className="w-4 h-4 " /></Button>
               </div>
               <Separator className="bg-primary/10" />
             </div>
@@ -244,6 +244,8 @@ export const DiaryForm = () => {
                         <SelectItem value='weatherWasQuiteGood'>Weather was quite good</SelectItem>
                         <SelectItem value='weatherWasQuiteIntense'>Weather was quite intense</SelectItem>
                         <SelectItem value='achieveATarget'>Achieve a target</SelectItem>
+                        <SelectItem value='travel'>Travel</SelectItem>
+                        <SelectItem value='restaurant'>Restaurant</SelectItem>
                       </SelectContent>
                     </Select>
                     <FormMessage />

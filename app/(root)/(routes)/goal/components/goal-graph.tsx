@@ -51,7 +51,7 @@ const GoalGraph = ({ goals }: { goal: PopulatedGoal, goals: PopulatedGoal[] }) =
   console.log(maxSplitNumber, splitNumber)
   return (
     <MountedContainer>
-      <div className="w-full overflow-x-auto space-x-2 p-1 aspect-[3/1] overflow-hidden ">
+      <div className="w-full overflow-x-auto space-x-2 p-1 h-[26rem] overflow-hidden ">
         <div className="w-full h-full flex flex-col gap-4 ">
           <div className="flex justify-between items-center bg-black rounded-lg p-2 pl-8 ">
             <h3 className='font-semibold text-3xl ' >Progress</h3>
