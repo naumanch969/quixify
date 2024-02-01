@@ -1,13 +1,13 @@
 "use client"
 
 import { PopulatedDiary } from '@/interfaces'
-import React, { useEffect, useState } from 'react'
-import { Bar, BarChart, CartesianGrid, Legend, Pie, PieChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts'
+import React from 'react'
+import { Pie, PieChart, ResponsiveContainer } from 'recharts'
 import { MountedContainer } from '@/components/ui/mounted-container'
 
 const Graphs = ({ diary }: { diary: PopulatedDiary }) => {
 
-   const data = [
+  const data = [
     { name: 'Group A', value: 400 },
     { name: 'Group B', value: 300 },
     { name: 'Group C', value: 300 },
