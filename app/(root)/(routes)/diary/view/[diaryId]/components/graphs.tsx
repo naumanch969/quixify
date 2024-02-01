@@ -7,10 +7,7 @@ import { MountedContainer } from '@/components/ui/mounted-container'
 
 const Graphs = ({ diary }: { diary: PopulatedDiary }) => {
 
-  const type = diary.type == 'daily' ? 'day' : diary.type.slice(0, -2)
-
-  // const [data, setData] = useState<{ variant: string, progress: number }[]>([])
-  const data = [
+   const data = [
     { name: 'Group A', value: 400 },
     { name: 'Group B', value: 300 },
     { name: 'Group C', value: 300 },
