@@ -1,5 +1,6 @@
 import { Goals } from '@/app/(root)/(routes)/goal/components/goals'
 import { Heading } from '@/components/ui/heading'
+import { PopulatedGoal } from '@/interfaces'
 import prismadb from '@/lib/prismadb'
 import { auth } from '@clerk/nextjs'
 import React from 'react'
@@ -18,7 +19,7 @@ const RelatedGoals = async () => {
     <div className='' >
 
       <Heading title='Related Goals' description='' />
-      <Goals data={goals} />
+      <Goals data={goals as PopulatedGoal[]} />
 
     </div>
   )
