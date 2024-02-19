@@ -43,7 +43,7 @@ import { PopulatedDiary } from "@/interfaces";
 const formSchema = z.object({
   productivity: z.string().min(1, { message: 'Diary is required.' }),
   description: z.string(),
-  main: z.array(z.string({ required_error: "Start date is required." })),
+  main: z.array(z.string({ required_error: "Main is required." })),
   day: z.date({ required_error: "Deadline is required." }),
   tags: z.array(z.string().min(1, { message: 'Type is required.' })),
   type: z.string().min(1, { message: 'Type is required.' }),
@@ -345,3 +345,7 @@ export const DiaryFormModal = () => {
     </MountedContainer>
   );
 };
+
+
+
+
